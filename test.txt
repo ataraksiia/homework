@@ -1,0 +1,9 @@
+---------- coverage: platform darwin, python 3.11.0-final-0 ----------
+Name                 Stmts   Miss  Cover
+----------------------------------------
+src/__init__.py          0      0   100%
+src/main.py             22      0   100%
+tests/__init__.py        0      0   100%
+tests/test_main.py      17      0   100%
+----------------------------------------
+TOTAL                   39      0   100%
