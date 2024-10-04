@@ -43,3 +43,19 @@ def test_category(category1: Any, product1: Any, product2: Any) -> Any:
         and category1.description == "Смартфоны, как средство коммуникации"
         and category1.products == [product1, product2]
     )
+
+
+def test_count_categories_and_count_products() -> None:
+    Category.count_categories = 0
+    Category.count_products = 0
+    _ = Category(
+        "Смартфоны",
+        "Смартфоны, как средство коммуникации и получение дополнительных функций для удобства жизни",
+        ["product1", "product2"],
+    )
+    _ = Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        [],
+    )
+    assert Category.count_categories == 2 and Category.count_products == 2
