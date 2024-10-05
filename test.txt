@@ -7,3 +7,14 @@ tests/__init__.py        0      0   100%
 tests/test_main.py      28      0   100%
 ----------------------------------------
 TOTAL                   50      0   100%
+
+14.2
+---------- coverage: platform darwin, python 3.11.0-final-0 ----------
+Name                 Stmts   Miss  Cover
+----------------------------------------
+src/__init__.py          0      0   100%
+src/main.py             45      0   100%
+tests/__init__.py        0      0   100%
+tests/test_main.py      39      0   100%
+----------------------------------------
+TOTAL                   84      0   100%
