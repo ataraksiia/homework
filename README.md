@@ -26,7 +26,6 @@
 + срок прорастания (germination_period)
 + цвет (color)
 
-
 #### Category имеет свойства:
 * название (name)
 * описание (description)
