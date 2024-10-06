@@ -38,6 +38,14 @@ class Product:
         else:
             raise ValueError("Цена не должна быть нулевая или отрицательная")
 
+    def __str__(self) -> str:
+        """Строковое отображение продукта."""
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.\n"
+
+    def __add__(self, other: Any) -> Any:
+        """Сложение продуктов для получения полной стоимисти товаров на складе."""
+        return self.quantity * self.__price + other.quantity * other.__price
+
 
 class Category:
     """Класс для категорий."""
@@ -45,22 +53,22 @@ class Category:
     name: str
     description: str
     # products: list
-    count_categories = 0
-    count_products = 0
+    category_count = 0
+    product_count = 0
 
     def __init__(self, name: str, description: str, products: list):
         self.name = name
         self.description = description
         self.__products = products
 
-        Category.count_categories += 1
-        Category.count_products += len(products)
+        Category.category_count += 1
+        Category.product_count += len(products)
 
     def add_product(self, product: Any) -> Any:
         """Метод, в который нужно передавать объект класса Product для записи продукта
         в приватный атрибут списка товаров."""
         self.__products.append(product)
-        Category.count_products += 1
+        Category.product_count += 1
 
     @property
     def products(self) -> list:
@@ -70,7 +78,36 @@ class Category:
             products.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n")
         return products
 
+    def __str__(self) -> str:
+        """Строковое отображение категории с общим числом всех продуктов."""
+        total_quantity = 0
+        for product in self.__products:
+            total_quantity += product.quantity
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
+
+# if __name__ == "__main__":
+#     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+#     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+#     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+#
+#     print(str(product1))
+#     print(str(product2))
+#     print(str(product3))
+#
+#     category1 = Category(
+#         "Смартфоны",
+#         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+#         [product1, product2, product3],
+#     )
+#
+#     print(str(category1))
+#
+#     print(category1.products)
+#
+#     print(product1 + product2)
+#     print(product1 + product3)
+#     print(product2 + product3)
 # if __name__ == "__main__":
 #     product1 = Product("iPhone 13", "128GB", 59_799.0, 100)
 #     product2 = Product("iPhone 5", "32GB", 10_000.0, 1)

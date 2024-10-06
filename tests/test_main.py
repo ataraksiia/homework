@@ -42,8 +42,8 @@ def test_category(category1: Any, product1: Any) -> None:
 
 
 def test_count_categories_and_count_products() -> None:
-    Category.count_categories = 0
-    Category.count_products = 0
+    Category.category_count = 0
+    Category.product_count = 0
     _ = Category(
         "Смартфоны",
         "Смартфоны, как средство коммуникации и получение дополнительных функций для удобства жизни",
@@ -54,7 +54,7 @@ def test_count_categories_and_count_products() -> None:
         "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
         [],
     )
-    assert Category.count_categories == 2 and Category.count_products == 2
+    assert Category.category_count == 2 and Category.product_count == 2
 
 
 def test_new_product(product2: Any) -> None:
@@ -90,3 +90,18 @@ def test_products(category1: Any, product1: Any) -> None:
         "iPhone 13, 59799.0 руб. Остаток: 100 шт.\n",
         "iPhone 5, 10000.0 руб. Остаток: 1 шт.\n",
     ]
+
+
+def test__str__product(product1: Any) -> None:
+    """Тест вывода класса Product"""
+    assert str(product1) == "iPhone 13, 59799.0 руб. Остаток: 100 шт.\n"
+
+
+def test__add__product(product1: Any, product2: Any) -> None:
+    """Тест вывода класса Product"""
+    assert product1 + product2 == 5989900.0
+
+
+def test__str__category(category1: Any) -> None:
+    """Тест вывода класса Category"""
+    assert str(category1) == "Смартфоны, количество продуктов: 101 шт."
