@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.main import Category, Product
+from src.main import Category, LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
@@ -13,6 +13,33 @@ def product1() -> Any:
 @pytest.fixture
 def product2() -> Any:
     return Product(name="iPhone 5", description="32GB", price=10_000.0, quantity=1)
+
+
+@pytest.fixture
+def smartphone1() -> Any:
+    return Smartphone(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180_000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый",
+    )
+
+
+@pytest.fixture
+def grass1() -> Any:
+    return LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый",
+    )
 
 
 def test_product(product1: Any, product2: Any) -> None:
@@ -83,6 +110,10 @@ def test_set_price(product1: Any) -> None:
 def test_add_products(category1: Any, product1: Any) -> None:
     category1.add_product(product1)
     assert category1.add_product(product1) is None
+    try:
+        category1.add_product("Not a product")
+    except TypeError:
+        assert True
 
 
 def test_products(category1: Any, product1: Any) -> None:
@@ -97,11 +128,38 @@ def test__str__product(product1: Any) -> None:
     assert str(product1) == "iPhone 13, 59799.0 руб. Остаток: 100 шт.\n"
 
 
-def test__add__product(product1: Any, product2: Any) -> None:
+def test__add__(product1: Any, product2: Any, smartphone1: Any, grass1: Any) -> None:
     """Тест вывода класса Product"""
-    assert product1 + product2 == 5989900.0
+    assert product1 + product2 == 5989900.0 and smartphone1 + grass1 == TypeError
 
 
 def test__str__category(category1: Any) -> None:
     """Тест вывода класса Category"""
     assert str(category1) == "Смартфоны, количество продуктов: 101 шт."
+
+
+def test_smartphone(smartphone1: Any) -> None:
+    """Тест класса Smartphone - наследника класса Product."""
+    assert (
+        smartphone1.name == "Samsung Galaxy S23 Ultra"
+        and smartphone1.description == "256GB, Серый цвет, 200MP камера"
+        and smartphone1.price == 180_000.0
+        and smartphone1.quantity == 5
+        and smartphone1.efficiency == 95.5
+        and smartphone1.model == "S23 Ultra"
+        and smartphone1.memory == 256
+        and smartphone1.color == "Серый"
+    )
+
+
+def test_lawngrass(grass1: Any) -> None:
+    """Тест класса LawnGrass - наследника класса Product."""
+    assert (
+        grass1.name == "Газонная трава"
+        and grass1.description == "Элитная трава для газона"
+        and grass1.price == 500.0
+        and grass1.quantity == 20
+        and grass1.country == "Россия"
+        and grass1.germination_period == "7 дней"
+        and grass1.color == "Зеленый"
+    )
