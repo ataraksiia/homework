@@ -163,3 +163,21 @@ def test_lawngrass(grass1: Any) -> None:
         and grass1.germination_period == "7 дней"
         and grass1.color == "Зеленый"
     )
+
+
+def test_mixinlog(capsys: Any) -> None:
+    """Тест класса MixinLog"""
+    Smartphone(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180_000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый",
+    )
+    cap_method = capsys.readouterr()
+    assert (
+        cap_method.out.strip() == "Smartphone (Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"
+    )
