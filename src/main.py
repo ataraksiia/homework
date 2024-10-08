@@ -5,11 +5,6 @@ from typing import Any
 class BaseProduct(ABC):
     """Базовый абстрактный класс BaseProduct, который является родительским для класса продуктов."""
 
-    name: str
-    description: str
-    # price: float
-    quantity: int
-
     @abstractmethod
     def __init__(self, *args: Any, **kwargs: Any):
         pass

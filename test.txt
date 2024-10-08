@@ -52,3 +52,14 @@ tests/__init__.py        0      0   100%
 tests/test_main.py      63      0   100%
 ----------------------------------------
 TOTAL                  160      1    99%
+
+16.2 покрытие тестов с открытым кодом проверки
+---------- coverage: platform darwin, python 3.11.0-final-0 ----------
+Name                 Stmts   Miss  Cover
+----------------------------------------
+src/__init__.py          0      0   100%
+src/main.py            123     30    76%
+tests/__init__.py        0      0   100%
+tests/test_main.py      63      0   100%
+----------------------------------------
+TOTAL                  186     30    84%
