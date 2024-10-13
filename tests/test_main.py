@@ -55,6 +55,10 @@ def test_product(product1: Any, product2: Any) -> None:
         and product2.price == 10_000.0
         and product2.quantity == 1
     )
+    try:
+        Product(name="iPhone 5", description="32GB", price=10_000.0, quantity=0)
+    except ValueError:
+        assert True
 
 
 @pytest.fixture
@@ -62,6 +66,11 @@ def category1(product1: Any, product2: Any) -> Any:
     return Category(
         name="Смартфоны", description="Смартфоны, как средство коммуникации", products=[product1, product2]
     )
+
+
+@pytest.fixture()
+def category2() -> Any:
+    return Category("Пустая категория", "Категория без продуктов", [])
 
 
 def test_category(category1: Any, product1: Any) -> None:
@@ -163,3 +172,26 @@ def test_lawngrass(grass1: Any) -> None:
         and grass1.germination_period == "7 дней"
         and grass1.color == "Зеленый"
     )
+
+
+def test_mixinlog(capsys: Any) -> None:
+    """Тест класса MixinLog"""
+    Smartphone(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180_000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый",
+    )
+    cap_method = capsys.readouterr()
+    assert (
+        cap_method.out.strip() == "Smartphone (Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"
+    )
+
+
+def test_middle_price(category1: Any, category2: Any) -> None:
+    assert category1.middle_price() == 59305.94059405941
+    assert category2.middle_price() == 0
